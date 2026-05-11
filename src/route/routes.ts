@@ -1,8 +1,8 @@
-import type { IncomingMessage } from "http";
+import type { IncomingMessage, ServerResponse } from "http";
 import { productController } from "../controller/products.controller";
 
 
-export const Handelroutes = (req: IncomingMessage, res) => {
+export const Handelroutes = (req: IncomingMessage, res : ServerResponse) => {
   const url = req.url;
   const method = req.method;
   if (url === "/" && method == "GET") {

@@ -1,6 +1,7 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import { readProduct } from "../service/product.service";
 import type { product } from "../types/product.type";
+import { ParseBody } from "./utility/parseBody";
 
 export const productController = async (
   req: IncomingMessage,
@@ -21,5 +22,13 @@ export const productController = async (
     const product = products.find((product: product) => product.id === id);
     res.writeHead(200, { "content-type": "text/plain" });
     res.end(JSON.stringify({ massage: "this is the product", data: product }));
+  } else if (method === "POST" && url === "/products") {
+    const body = await ParseBody(req);
+    console.log(body);
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end(JSON.stringify({ 
+      massage: "product created successfully", 
+      //data: products 
+    }));
   }
 };
